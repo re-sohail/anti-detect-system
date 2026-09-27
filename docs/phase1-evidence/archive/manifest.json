@@ -1,0 +1,312 @@
+[
+  {
+    "id": 1,
+    "url": "https://support.apple.com/en-us/111924",
+    "retrievedAt": "2026-09-27T13:58:56+00:00",
+    "status": 200,
+    "file": "01-1.html",
+    "bytes": 182056,
+    "sha256": "7383626eaefa647a80c7d6371f5fb22e4254b50ea2dc4429f83a2fd4f40c99ba",
+    "contentType": "text/html;charset=utf-8"
+  },
+  {
+    "id": 2,
+    "url": "https://inria.hal.science/hal-01652021/document",
+    "retrievedAt": "2026-09-27T13:58:59+00:00",
+    "status": 200,
+    "file": "02-1.pdf",
+    "bytes": 662523,
+    "sha256": "c35bf37a2dec71bccfa32ac50dfdadf20fbdb62b5d55d3ecff320013a4b9a0ac",
+    "contentType": "application/pdf"
+  },
+  {
+    "id": 3,
+    "url": "https://coveryourtracks.eff.org/static/browser-uniqueness.pdf",
+    "retrievedAt": "2026-09-27T13:59:04+00:00",
+    "status": 200,
+    "file": "03-1.pdf",
+    "bytes": 428501,
+    "sha256": "dc486876446bf65944a1f225e0419e6eb986bfbb016e2a728586485a9524dbbb",
+    "contentType": "application/pdf"
+  },
+  {
+    "id": 4,
+    "url": "https://coveryourtracks.eff.org/about",
+    "retrievedAt": "2026-09-27T13:59:09+00:00",
+    "status": 200,
+    "file": "04-1.html",
+    "bytes": 14725,
+    "sha256": "79d76f211ecb5b52079cfe6c1200edee12a86a3082600882a52599575fd7ad85",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 5,
+    "url": "https://amiunique.org/",
+    "retrievedAt": "2026-09-27T13:59:10+00:00",
+    "status": 200,
+    "file": "05-1.html",
+    "bytes": 571395,
+    "sha256": "7fb92ba8445a53dc2347605a0f7ab771dd736da97805d305f33de37d46d38915",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 6,
+    "url": "https://multilogin.com/",
+    "retrievedAt": "2026-09-27T13:59:13+00:00",
+    "status": 200,
+    "file": "06-1.html",
+    "bytes": 489498,
+    "sha256": "d0a97bbdd14b64ec42c3675d773c1f86e5f4d8b9d893cab398f5e6a130fd2365",
+    "contentType": "text/html; charset=UTF-8"
+  },
+  {
+    "id": 7,
+    "url": "https://gologin.com/",
+    "retrievedAt": "2026-09-27T13:59:13+00:00",
+    "status": 200,
+    "file": "07-1.html",
+    "bytes": 330264,
+    "sha256": "ec2afe11a5adcef9a395e21b62cbb37594fb7e2e34a83b44b1de676240035646",
+    "contentType": "text/html; charset=UTF-8"
+  },
+  {
+    "id": 7,
+    "url": "https://gologin.com/features/",
+    "retrievedAt": "2026-09-27T13:59:13+00:00",
+    "status": 200,
+    "file": "07-2.html",
+    "bytes": 302501,
+    "sha256": "39ebe1a417f0aa777be6363c955645f7bfbb9a264b1d1f47688ddf94219971c5",
+    "contentType": "text/html; charset=UTF-8"
+  },
+  {
+    "id": 8,
+    "url": "https://www.adspower.com/",
+    "retrievedAt": "2026-09-27T13:59:14+00:00",
+    "status": 200,
+    "file": "08-1.html",
+    "bytes": 349477,
+    "sha256": "f05303e22c97ba593102992e9ecd055ee355911612b72daf638c0911f780ef15",
+    "contentType": "text/html;charset=utf-8"
+  },
+  {
+    "id": 9,
+    "url": "https://www.browserstack.com/real-device-cloud",
+    "retrievedAt": "2026-09-27T13:59:14+00:00",
+    "status": 200,
+    "file": "09-1.html",
+    "bytes": 461229,
+    "sha256": "5b92550f935866e1100bafac98c53175dc66a189a830d0dc025ad050d340fe92",
+    "contentType": "text/html; charset=UTF-8"
+  },
+  {
+    "id": 10,
+    "url": "https://docs.getutm.app/",
+    "retrievedAt": "2026-09-27T13:59:16+00:00",
+    "status": 200,
+    "file": "10-1.html",
+    "bytes": 23008,
+    "sha256": "e4cb46a7111c863997fa816bf8d9db297a63ec7e5015fcdf0618dcb70fbd0602",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 11,
+    "url": "https://www.qemu.org/docs/master/system/introduction.html",
+    "retrievedAt": "2026-09-27T13:59:16+00:00",
+    "status": 200,
+    "file": "11-1.html",
+    "bytes": 23807,
+    "sha256": "e303bd96db6f936bbf124b0ebebb5a71bb9076aa79f29013a41c0492e879fe12",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 12,
+    "url": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/install-hyper-v",
+    "retrievedAt": "2026-09-27T13:59:18+00:00",
+    "status": 200,
+    "file": "12-1.html",
+    "bytes": 61372,
+    "sha256": "4e7e6dbc1cf9784882c9c9a3edf50c67d0c98d54db908d306bb8016bc7796143",
+    "contentType": "text/html"
+  },
+  {
+    "id": 13,
+    "url": "https://developer.apple.com/documentation/virtualization/running-gui-linux-in-a-virtual-machine-on-a-mac",
+    "retrievedAt": "2026-09-27T13:59:20+00:00",
+    "status": 200,
+    "file": "13-1.html",
+    "bytes": 19114,
+    "sha256": "b647d230faa12325841a556d69381f2d974b864866eaf61c7b1618c630b06b8f",
+    "contentType": "text/html"
+  },
+  {
+    "id": 14,
+    "url": "https://developer.apple.com/documentation/virtualization/running-macos-in-a-virtual-machine-on-apple-silicon",
+    "retrievedAt": "2026-09-27T13:59:22+00:00",
+    "status": 200,
+    "file": "14-1.html",
+    "bytes": 19170,
+    "sha256": "46656a603787ed28a8b6f369018b4454d267891e4194ca85ad02a83b75e51bb5",
+    "contentType": "text/html"
+  },
+  {
+    "id": 15,
+    "url": "https://www.qemu.org/docs/master/about/build-platforms.html",
+    "retrievedAt": "2026-09-27T13:59:25+00:00",
+    "status": 200,
+    "file": "15-1.html",
+    "bytes": 17436,
+    "sha256": "2b5b974f64d18ed4218fc25a7e72f8e9a4ebe6851e1df4199e9c49cb58abb339",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 15,
+    "url": "https://www.qemu.org/docs/master/system/whpx.html",
+    "retrievedAt": "2026-09-27T13:59:26+00:00",
+    "status": 200,
+    "file": "15-2.html",
+    "bytes": 17972,
+    "sha256": "28e0d60aa9570f01d9424c4dece2e32d9dc321f7226e55c54f0c74c0100abd7b",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 16,
+    "url": "https://learn.microsoft.com/en-us/windows/whats-new/windows-11-requirements",
+    "retrievedAt": "2026-09-27T13:59:27+00:00",
+    "status": 200,
+    "file": "16-1.html",
+    "bytes": 55535,
+    "sha256": "c4387634b8c8ef93afa56e6276c2839178496f4a085481705926cf0306cb7dfd",
+    "contentType": "text/html"
+  },
+  {
+    "id": 17,
+    "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+    "retrievedAt": "2026-09-27T13:59:29+00:00",
+    "status": 200,
+    "file": "17-1.html",
+    "bytes": 169776,
+    "sha256": "7045d881c4dfd55f2b473235fedd55599fef46a0ad91b5bf0599044cb5262728",
+    "contentType": "text/html"
+  },
+  {
+    "id": 18,
+    "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine",
+    "retrievedAt": "2026-09-27T13:59:31+00:00",
+    "status": 200,
+    "file": "18-1.html",
+    "bytes": 18551,
+    "sha256": "d0cd5fa5973e5f1df5279d0196f2ff19381652eba15c1b8f696005279a2861bb",
+    "contentType": "text/html"
+  },
+  {
+    "id": 19,
+    "url": "https://developer.chrome.com/docs/privacy-security/user-agent-client-hints",
+    "retrievedAt": "2026-09-27T13:59:32+00:00",
+    "status": 200,
+    "file": "19-1.html",
+    "bytes": 135985,
+    "sha256": "296709c6e8f383c2430d20df0628b637a3f6f88dcb5871700bd5bbde41384242",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 20,
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Screen/width",
+    "retrievedAt": "2026-09-27T13:59:33+00:00",
+    "status": 200,
+    "file": "20-1.html",
+    "bytes": 149113,
+    "sha256": "7ed6123faa32b5c179e64d522a2fc923af3cab477fe719456fd47b8bc949995d",
+    "contentType": "text/html"
+  },
+  {
+    "id": 20,
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio",
+    "retrievedAt": "2026-09-27T13:59:35+00:00",
+    "status": 200,
+    "file": "20-2.html",
+    "bytes": 178773,
+    "sha256": "992ecbcf766a922ad59528314b26ca792cb9ec2c2de6b201c73523ea3cb5b97b",
+    "contentType": "text/html"
+  },
+  {
+    "id": 21,
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API",
+    "retrievedAt": "2026-09-27T13:59:39+00:00",
+    "status": 200,
+    "file": "21-1.html",
+    "bytes": 158280,
+    "sha256": "93a1f70e336c340b169b392370a7283e3963f3c3a20171e997475c23e20d7dab",
+    "contentType": "text/html"
+  },
+  {
+    "id": 22,
+    "url": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/setup-nat-network",
+    "retrievedAt": "2026-09-27T13:59:39+00:00",
+    "status": 200,
+    "file": "22-1.html",
+    "bytes": 63198,
+    "sha256": "e3279a6e2c030312a827d03d080296d7b293c13cd6d927aa34035b05995d73be",
+    "contentType": "text/html"
+  },
+  {
+    "id": 23,
+    "url": "https://playwright.dev/docs/emulation",
+    "retrievedAt": "2026-09-27T13:59:41+00:00",
+    "status": 200,
+    "file": "23-1.html",
+    "bytes": 172562,
+    "sha256": "6b57630c18126d7b5cc6a011cf945659de4849201856b145cf6c683044f994d2",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 24,
+    "url": "https://docs.docker.com/desktop/features/networking/",
+    "retrievedAt": "2026-09-27T13:59:42+00:00",
+    "status": 200,
+    "file": "24-1.html",
+    "bytes": 527173,
+    "sha256": "cff01966baeb773453f3e9118535c771821e68506399be832ec36676b575c567",
+    "contentType": "text/html"
+  },
+  {
+    "id": 25,
+    "url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "retrievedAt": "2026-09-27T13:59:43+00:00",
+    "status": 200,
+    "file": "25-1.html",
+    "bytes": 433130,
+    "sha256": "38f873e2407541a55550a74d21b58a2620b1678079eece560e3f8ead0b3ea63d",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 26,
+    "url": "https://docs.github.com/en/actions/reference/limits",
+    "retrievedAt": "2026-09-27T13:59:44+00:00",
+    "status": 200,
+    "file": "26-1.html",
+    "bytes": 381823,
+    "sha256": "70a043a760284f37a22100d4688163cd79d4bde3e6b67fdc498f62cfb5155cc5",
+    "contentType": "text/html; charset=utf-8"
+  },
+  {
+    "id": 27,
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages",
+    "retrievedAt": "2026-09-27T13:59:45+00:00",
+    "status": 200,
+    "file": "27-1.html",
+    "bytes": 169731,
+    "sha256": "8f70fa81d1f651a9ec4085e109b67d2bb99d6ce8ea8adbc4b03f9e3868594ea1",
+    "contentType": "text/html"
+  },
+  {
+    "id": 28,
+    "url": "https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-vastel.pdf",
+    "retrievedAt": "2026-09-27T13:59:46+00:00",
+    "status": 200,
+    "file": "28-1.pdf",
+    "bytes": 617460,
+    "sha256": "d79f2c8716a275165374af5eb73f96bb5209969df35f4019646cde5daac9797b",
+    "contentType": "application/pdf"
+  }
+]

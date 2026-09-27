@@ -1,0 +1,8 @@
+[
+  {"id": "host1-profile-A", "treatment": "T1-profiles-one-os", "host": "study-host-1"},
+  {"id": "host1-profile-B", "treatment": "T1-profiles-one-os", "host": "study-host-1"},
+  {"id": "host1-guest-A", "treatment": "T2-vms-one-host", "host": "study-host-1"},
+  {"id": "host1-guest-B", "treatment": "T2-vms-one-host", "host": "study-host-1"},
+  {"id": "control-P-01", "treatment": "T3-physical-hosts", "host": "control:P-01"},
+  {"id": "control-P-02", "treatment": "T3-physical-hosts", "host": "control:P-02"}
+]

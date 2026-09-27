@@ -1,0 +1,46 @@
+# CI only: lint/typecheck, unit + service tests, analysis tests, build artifacts.
+# GitHub-hosted runners are ephemeral VMs [25]; they are never used as a proxy or study host.
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Start collector for live service tests
+        run: |
+          npm run build -w collector
+          (cd collector && NODE_ENV=production COLLECTOR_ADMIN_KEY=ci-admin-key node --no-warnings=ExperimentalWarning server.mjs &)
+          for i in $(seq 1 60); do curl -sf localhost:4100/api/v1/echo && break; sleep 1; done
+      - run: npm test
+        env: { COLLECTOR_ADMIN_KEY: ci-admin-key }
+      - run: python -m unittest discover -s analysis/tests
+      - run: npm sbom --sbom-format cyclonedx > sbom.cdx.json
+      - uses: actions/upload-artifact@v4
+        with: { name: sbom, path: sbom.cdx.json }
+
+  package:
+    needs: test
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - run: npm run package -w app
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false' # signing uses institution credentials; not a blocker for internal trials
+      - uses: actions/upload-artifact@v4
+        with: { name: app-${{ matrix.os }}, path: app/dist/* }

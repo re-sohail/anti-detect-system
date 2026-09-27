@@ -1,0 +1,9 @@
+[project]
+name = "lvd-analysis"
+version = "0.1.0"
+description = "Blinding, pair construction, scoring and statistics for the LVD research study (stdlib only)."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+lvd-analysis = "lvd_analysis.__main__:main"
