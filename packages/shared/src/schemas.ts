@@ -74,6 +74,11 @@ export const ImageRecord = z.object({
   status: z.enum(['active', 'superseded']),
   /** 'cloud-init': the app applies the preset (timezone, locale, display, browser policy) on first boot. */
   provisioning: z.enum(['cloud-init', 'manual']).default('manual'),
+  /** Set when this base was built from a provisioned guest (brief §11: versioned base images). */
+  derivedFrom: z
+    .object({ imageId: z.string(), imageSha256: z.string(), guestId: z.string(), presetId: z.string(), presetVersion: z.number().int(), builtAt: z.iso.datetime() })
+    .nullable()
+    .default(null),
 });
 export type ImageRecord = z.infer<typeof ImageRecord>;
 

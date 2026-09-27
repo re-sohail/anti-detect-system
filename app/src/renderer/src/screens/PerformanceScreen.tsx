@@ -40,7 +40,7 @@ export function PerformanceScreen() {
             <div className="table-wrap">
               <table>
                 <thead>
-                  <tr><th>Guest</th><th>Starts</th><th>Start → control</th><th>Start → desktop</th><th>Start → browser</th><th>Idle RSS</th><th>Active RSS</th><th>CPU</th><th>Disk growth</th><th>Power / thermal</th></tr>
+                  <tr><th>Guest</th><th>Starts</th><th>Start → control</th><th>Provisioning boot</th><th>Start → desktop</th><th>Start → browser</th><th>Idle RSS</th><th>Active RSS</th><th>CPU</th><th>Disk growth</th><th>Power / thermal</th></tr>
                 </thead>
                 <tbody>
                   {r.guests.map((g) => (
@@ -48,6 +48,7 @@ export function PerformanceScreen() {
                       <td>{g.name}<div className="hint">{g.samples} samples</div></td>
                       <td>{g.starts}</td>
                       <td>{fmt(g.controlReadyMs, 's', 1000)}</td>
+                      <td>{fmt(g.provisioningBootMs, 's', 1000)}</td>
                       <td>{fmt(g.desktopReadyMs, 's', 1000)}</td>
                       <td>{fmt(g.browserLaunchMs, 's', 1000)}</td>
                       <td>{fmt(g.idleRssMb, 'MB')}</td>

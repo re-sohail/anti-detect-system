@@ -28,6 +28,15 @@ VOLATILE_FIELDS = {"screen.viewport", "perf.timerResolution", "perf.navigation",
 LABELS = ("same-guest", "different-guest-same-host", "different-host")
 
 
+def obs_key(o: dict | None):
+    """What an observation says, without collection timing (durationMs varies every visit)."""
+    if o is None:
+        return None
+    if o.get("status") == "ok":
+        return ("ok", json.dumps(o.get("value"), sort_keys=True))
+    return ("absent", o.get("reason"))
+
+
 def family_of(field_id: str) -> str:
     return FAMILY_BY_PREFIX.get(field_id.split(".", 1)[0], "browser-config")
 

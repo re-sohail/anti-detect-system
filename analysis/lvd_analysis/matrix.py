@@ -23,26 +23,28 @@ def build(merged: dict) -> dict[str, Any]:
         units = defaultdict(list)
         for v in vs:
             units[v["truth"]["guest"]].append(v)
-        # Storage separation: did any unit see a study token planted by a DIFFERENT unit?
-        planted = {}
+        # Storage separation (R1): for every planted token, did later visits of the SAME unit read it
+        # back (retained) or not (lost), and did any OTHER unit ever see it (crossing)?
+        def tok(v: dict) -> dict:
+            return ((v["observations"].get("storage.testToken") or {}).get("value") or {})
+        planted, retained, lost, crossings = 0, 0, 0, 0
         for u, uvs in units.items():
-            for v in uvs:
-                tok = ((v["observations"].get("storage.testToken") or {}).get("value") or {})
-                if tok.get("placedToken"):
-                    planted[tok["placedToken"]] = u
-        crossings, retained, checked = 0, 0, 0
-        for u, uvs in units.items():
-            for v in uvs:
-                tok = ((v["observations"].get("storage.testToken") or {}).get("value") or {})
-                ex = tok.get("existingToken")
-                if ex and ex in planted:
-                    checked += 1
-                    if planted[ex] == u:
+            uvs = sorted(uvs, key=lambda x: x["receivedAt"])
+            for i, v in enumerate(uvs):
+                p = tok(v).get("placedToken")
+                if not p:
+                    continue
+                planted += 1
+                later = uvs[i + 1:]
+                if later:
+                    if any(tok(x).get("existingToken") == p for x in later):
                         retained += 1
                     else:
-                        crossings += 1
-        storage = ("not measured (no planted tokens re-read)" if checked == 0 else
-                   f"{crossings} cross-unit token sightings, {retained} same-unit retentions in {checked} checks")
+                        lost += 1
+                crossings += sum(1 for ou, ouvs in units.items() if ou != u for x in ouvs if tok(x).get("existingToken") == p)
+        storage = ("not measured (no token planted)" if planted == 0 else
+                   f"{planted} planted: {retained} retained, {lost} lost after restart, {planted - retained - lost} not re-read; "
+                   f"{crossings} cross-unit sightings")
 
         # OS separation: guest-reported OS vs host OS.
         pairs = {(v["guestReport"] or {}).get("os"): v["truth"].get("hostOs") for v in vs if v.get("guestReport")}

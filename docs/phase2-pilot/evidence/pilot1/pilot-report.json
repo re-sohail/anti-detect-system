@@ -1,0 +1,346 @@
+{
+  "startedAt": "2026-09-27T13:56:29.784Z",
+  "collector": "http://localhost:4100",
+  "milestones": {
+    "image-registered": 1218,
+    "guest-created": 2307,
+    "control-ready": 2978,
+    "provisioned": 299252,
+    "desktop-runner-started": 326275,
+    "run-started": 331898,
+    "visit-and-report-received": 537738,
+    "run-finished": 540821,
+    "guest-stopped": 556585
+  },
+  "host": {
+    "arch": "arm64",
+    "os": "Darwin 25.6.0",
+    "cpu": "Apple M1 Pro",
+    "cpus": 8,
+    "ramMb": 16384,
+    "hypervisor": {
+      "available": true,
+      "kind": "hvf",
+      "detail": "kern.hv_support=1"
+    },
+    "qemu": "QEMU emulator version 11.1.1"
+  },
+  "image": {
+    "id": "img_mujvto2gb1341b4d1f",
+    "sha256": "3fa2da19de8343bc144517d15bab29a90352482640d326939c9756af4f553f7b",
+    "sizeBytes": 431685632,
+    "verifiedAgainst": "published SHA-512",
+    "registerMs": 1156
+  },
+  "prerequisites": [
+    {
+      "id": "host-arch",
+      "label": "Host architecture allowed",
+      "pass": true,
+      "detail": "host arm64; preset allows arm64"
+    },
+    {
+      "id": "host-os",
+      "label": "Host OS allowed",
+      "pass": true,
+      "detail": "host darwin; preset allows darwin"
+    },
+    {
+      "id": "host-ram",
+      "label": "Host RAM meets preset minimum",
+      "pass": true,
+      "detail": "host 16384 MB; minimum 8192 MB"
+    },
+    {
+      "id": "hypervisor",
+      "label": "Hardware hypervisor available",
+      "pass": true,
+      "detail": "kern.hv_support=1"
+    },
+    {
+      "id": "backend",
+      "label": "QEMU backend installed",
+      "pass": true,
+      "detail": "Found /opt/homebrew/bin/qemu-system-aarch64, /opt/homebrew/bin/qemu-system-x86_64"
+    },
+    {
+      "id": "guest-arch",
+      "label": "Guest architecture aarch64 is natively accelerated",
+      "pass": true,
+      "detail": "supported: aarch64"
+    },
+    {
+      "id": "firmware",
+      "label": "UEFI firmware present",
+      "pass": true,
+      "detail": "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+    },
+    {
+      "id": "image",
+      "label": "Base image registered and present",
+      "pass": true,
+      "detail": "Debian 13 generic cloud debian-13-generic-arm64.qcow2 (/private/tmp/claude-501/-Users-mrmacbook-Documents-personal-project-Nextjs-new-project/c487ed7c-bbc4-4060-9117-c3abafdedc4a/scratchpad/pilot1/data/images/img_mujvto2gb1341b4d1f.qcow2)"
+    },
+    {
+      "id": "image-match",
+      "label": "Image OS/arch match preset",
+      "pass": true,
+      "detail": "image linux/aarch64; preset linux/aarch64"
+    },
+    {
+      "id": "disk",
+      "label": "Free disk for the guest disk at full size",
+      "pass": true,
+      "detail": "free 91067 MB; need 16384 MB"
+    },
+    {
+      "id": "memory",
+      "label": "Memory available after running guests and host reserve",
+      "pass": true,
+      "detail": "need 3072 MB; available 14336 MB (total 16384 − reserve 2048 − running guests 0)"
+    },
+    {
+      "id": "route",
+      "label": "Network exit registered and approved",
+      "pass": true,
+      "detail": "default-nat (default-nat), approved by built-in"
+    },
+    {
+      "id": "vcpus",
+      "label": "vCPUs do not exceed host CPUs",
+      "pass": true,
+      "detail": "need 2; host has 8"
+    }
+  ],
+  "run": {
+    "id": "run_mujw0s2bb30273a9f3",
+    "status": "complete",
+    "statusReason": null,
+    "compare": [
+      {
+        "key": "timeZone",
+        "label": "Time zone",
+        "selected": "Europe/London",
+        "guestReported": "Europe/London",
+        "browserReported": "Europe/London",
+        "serverObserved": null,
+        "mismatch": false
+      },
+      {
+        "key": "locale",
+        "label": "Locale / language",
+        "selected": "en-GB",
+        "guestReported": "C",
+        "browserReported": "en-US",
+        "serverObserved": "en-US",
+        "mismatch": true
+      },
+      {
+        "key": "display",
+        "label": "Display (CSS px for browser)",
+        "selected": "1280x800",
+        "guestReported": "1280x800",
+        "browserReported": "1280x800 @1x",
+        "serverObserved": null,
+        "mismatch": false
+      },
+      {
+        "key": "cpus",
+        "label": "Logical CPUs",
+        "selected": "2",
+        "guestReported": "2",
+        "browserReported": "2",
+        "serverObserved": null,
+        "mismatch": false
+      },
+      {
+        "key": "memory",
+        "label": "Memory (browser value is a coarse GB bucket)",
+        "selected": "3072 MB",
+        "guestReported": "2968 MB",
+        "browserReported": "unknown (not-supported)",
+        "serverObserved": null,
+        "mismatch": false
+      },
+      {
+        "key": "os",
+        "label": "Operating system",
+        "selected": "linux",
+        "guestReported": "linux",
+        "browserReported": "Linux x86_64",
+        "serverObserved": null,
+        "mismatch": false
+      },
+      {
+        "key": "chrome",
+        "label": "Chrome version",
+        "selected": null,
+        "guestReported": "154.0.8037.57",
+        "browserReported": "154.0.0.0",
+        "serverObserved": "154.0.0.0",
+        "mismatch": false
+      },
+      {
+        "key": "exit",
+        "label": "Network exit (server-observed)",
+        "selected": "default-nat",
+        "guestReported": null,
+        "browserReported": null,
+        "serverObserved": "127.0.0.1",
+        "mismatch": false
+      }
+    ],
+    "networkChecks": [
+      {
+        "runId": "run_mujw0s2bb30273a9f3",
+        "at": "2026-09-27T14:02:01.683Z",
+        "phase": "start",
+        "routeId": "default-nat",
+        "collectorReachable": true,
+        "observedIp": "127.0.0.1",
+        "expectedIp": null,
+        "verdict": "unverified",
+        "reason": "baseline: host egress recorded as expected exit for default NAT route"
+      },
+      {
+        "runId": "run_mujw0s2bb30273a9f3",
+        "at": "2026-09-27T14:05:30.605Z",
+        "phase": "end",
+        "routeId": "default-nat",
+        "collectorReachable": true,
+        "observedIp": "127.0.0.1",
+        "expectedIp": "127.0.0.1",
+        "verdict": "valid"
+      },
+      {
+        "runId": "run_mujw0s2bb30273a9f3",
+        "at": "2026-09-27T14:05:26.025Z",
+        "phase": "adhoc",
+        "routeId": "default-nat",
+        "collectorReachable": true,
+        "observedIp": "127.0.0.1",
+        "expectedIp": "127.0.0.1",
+        "verdict": "valid",
+        "reason": "visit 976b9d6e-62bf-4bee-af2c-666aeb12b1a5"
+      }
+    ]
+  },
+  "guestEvents": [
+    {
+      "guestId": "guest_mujvtp8sad8826e07b",
+      "at": "2026-09-27T13:56:32.455Z",
+      "event": "start-requested",
+      "runToken": null,
+      "detail": {
+        "display": "headless",
+        "conditionSeq": 1
+      }
+    },
+    {
+      "guestId": "guest_mujvtp8sad8826e07b",
+      "at": "2026-09-27T13:56:32.763Z",
+      "event": "control-ready",
+      "runToken": null,
+      "detail": null
+    },
+    {
+      "guestId": "guest_mujvtp8sad8826e07b",
+      "at": "2026-09-27T14:01:28.569Z",
+      "event": "provisioned",
+      "runToken": null,
+      "detail": {}
+    },
+    {
+      "guestId": "guest_mujvtp8sad8826e07b",
+      "at": "2026-09-27T14:01:54.952Z",
+      "event": "runner-started",
+      "runToken": null,
+      "detail": {
+        "agentVersion": "1.0.0"
+      }
+    },
+    {
+      "guestId": "guest_mujvtp8sad8826e07b",
+      "at": "2026-09-27T14:02:05.143Z",
+      "event": "agent-report-sent",
+      "runToken": "tok_cd5c7735365e17ec7e117212",
+      "detail": {
+        "result": "HTTP 201"
+      }
+    },
+    {
+      "guestId": "guest_mujvtp8sad8826e07b",
+      "at": "2026-09-27T14:02:05.144Z",
+      "event": "browser-launched",
+      "runToken": "tok_cd5c7735365e17ec7e117212",
+      "detail": {
+        "browser": "chromium"
+      }
+    }
+  ],
+  "performance": {
+    "generatedAt": "2026-09-27T14:05:46.371Z",
+    "hostId": "host_pilot",
+    "guests": [
+      {
+        "guestId": "guest_mujvtp8sad8826e07b",
+        "name": "pilot-A",
+        "presetId": "preset_mujvtoylcf07e70ac9",
+        "starts": 1,
+        "controlReadyMs": {
+          "n": 1,
+          "median": 308,
+          "p90": 308,
+          "p95": 308,
+          "max": 308
+        },
+        "desktopReadyMs": {
+          "n": 1,
+          "median": 322497,
+          "p90": 322497,
+          "p95": 322497,
+          "max": 322497
+        },
+        "browserLaunchMs": {
+          "n": 1,
+          "median": 332689,
+          "p90": 332689,
+          "p95": 332689,
+          "max": 332689
+        },
+        "idleRssMb": {
+          "n": 63,
+          "median": 776.8,
+          "p90": 1555.8999999999999,
+          "p95": 1602.17,
+          "max": 1879.1
+        },
+        "activeRssMb": {
+          "n": 48,
+          "median": 1235.7,
+          "p90": 2295.620000000001,
+          "p95": 2478.545,
+          "max": 3016.6
+        },
+        "cpuPct": {
+          "n": 111,
+          "median": 4.1,
+          "p90": 101,
+          "p95": 128.45,
+          "max": 199.2
+        },
+        "diskGrowthMb": 2776,
+        "powerSources": [
+          "AC Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 111
+      }
+    ],
+    "maxConcurrentGuests": 1,
+    "note": "Idle RSS = samples with CPU < 10%. Desktop-ready = guest runner started after autologin. Browser launch = runner opened the study page. Report medians and tails; a single run is not a benchmark."
+  },
+  "finishedAt": "2026-09-27T14:05:46.371Z"
+}

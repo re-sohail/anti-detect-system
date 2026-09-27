@@ -1,0 +1,18 @@
+[
+  {
+    "settleSeconds": 5,
+    "planted": "ce700c22-ad7d-42f0-80ff-9e680c5b65eb",
+    "previouslyStored": null,
+    "readBack": "ce700c22-ad7d-42f0-80ff-9e680c5b65eb",
+    "retained": true,
+    "shutdownMs": 1007
+  },
+  {
+    "settleSeconds": 60,
+    "planted": null,
+    "previouslyStored": "ce700c22-ad7d-42f0-80ff-9e680c5b65eb",
+    "readBack": "ce700c22-ad7d-42f0-80ff-9e680c5b65eb",
+    "retained": false,
+    "shutdownMs": 1263
+  }
+]

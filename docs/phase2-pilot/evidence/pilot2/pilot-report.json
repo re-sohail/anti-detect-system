@@ -1,0 +1,656 @@
+{
+  "startedAt": "2026-09-27T14:08:45.515Z",
+  "collector": "http://localhost:4100",
+  "checks": {
+    "R1: A planted a token in run 1": true,
+    "R1: A retained its token after restart": false,
+    "R1: B never saw a token": true,
+    "C17: A and B share one server-observed exit": true,
+    "all four runs complete": true
+  },
+  "runs": [
+    {
+      "id": "run_mujwi0kbacf2885b44",
+      "status": "complete",
+      "reason": null,
+      "treatment": "T2-vms-one-host",
+      "guest": "guest_mujw9gv4e9595a9664",
+      "compare": [
+        {
+          "key": "timeZone",
+          "label": "Time zone",
+          "selected": "Europe/London",
+          "guestReported": "Europe/London",
+          "browserReported": "Europe/London",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "locale",
+          "label": "Locale / language",
+          "selected": "en-GB",
+          "guestReported": "en-GB",
+          "browserReported": "en-US",
+          "serverObserved": "en-US",
+          "mismatch": false
+        },
+        {
+          "key": "display",
+          "label": "Display (CSS px for browser)",
+          "selected": "1280x800",
+          "guestReported": "1280x800",
+          "browserReported": "1280x800 @1x",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "cpus",
+          "label": "Logical CPUs",
+          "selected": "2",
+          "guestReported": "2",
+          "browserReported": "2",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "memory",
+          "label": "Memory (browser value is a coarse GB bucket)",
+          "selected": "3072 MB",
+          "guestReported": "2968 MB",
+          "browserReported": "unknown (insecure-context)",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "os",
+          "label": "Operating system",
+          "selected": "linux",
+          "guestReported": "linux",
+          "browserReported": "Linux x86_64",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "chrome",
+          "label": "Chrome version",
+          "selected": null,
+          "guestReported": "154.0.8037.57",
+          "browserReported": "154.0.0.0",
+          "serverObserved": "154.0.0.0",
+          "mismatch": false
+        },
+        {
+          "key": "exit",
+          "label": "Network exit (server-observed)",
+          "selected": "default-nat",
+          "guestReported": null,
+          "browserReported": null,
+          "serverObserved": "127.0.0.1",
+          "mismatch": false
+        }
+      ]
+    },
+    {
+      "id": "run_mujwi0lkbaed809815",
+      "status": "complete",
+      "reason": null,
+      "treatment": "T2-vms-one-host",
+      "guest": "guest_mujw9h5be57e80d246",
+      "compare": [
+        {
+          "key": "timeZone",
+          "label": "Time zone",
+          "selected": "Europe/London",
+          "guestReported": "Europe/London",
+          "browserReported": "Europe/London",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "locale",
+          "label": "Locale / language",
+          "selected": "en-GB",
+          "guestReported": "en-GB",
+          "browserReported": "en-US",
+          "serverObserved": "en-US",
+          "mismatch": false
+        },
+        {
+          "key": "display",
+          "label": "Display (CSS px for browser)",
+          "selected": "1280x800",
+          "guestReported": "1280x800",
+          "browserReported": "1280x800 @1x",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "cpus",
+          "label": "Logical CPUs",
+          "selected": "2",
+          "guestReported": "2",
+          "browserReported": "2",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "memory",
+          "label": "Memory (browser value is a coarse GB bucket)",
+          "selected": "3072 MB",
+          "guestReported": "2968 MB",
+          "browserReported": "unknown (insecure-context)",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "os",
+          "label": "Operating system",
+          "selected": "linux",
+          "guestReported": "linux",
+          "browserReported": "Linux x86_64",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "chrome",
+          "label": "Chrome version",
+          "selected": null,
+          "guestReported": "154.0.8037.57",
+          "browserReported": "154.0.0.0",
+          "serverObserved": "154.0.0.0",
+          "mismatch": false
+        },
+        {
+          "key": "exit",
+          "label": "Network exit (server-observed)",
+          "selected": "default-nat",
+          "guestReported": null,
+          "browserReported": null,
+          "serverObserved": "127.0.0.1",
+          "mismatch": false
+        }
+      ]
+    },
+    {
+      "id": "run_mujwirwa253858e1df",
+      "status": "complete",
+      "reason": null,
+      "treatment": "T4-restarts",
+      "guest": "guest_mujw9gv4e9595a9664",
+      "compare": [
+        {
+          "key": "timeZone",
+          "label": "Time zone",
+          "selected": "Europe/London",
+          "guestReported": "Europe/London",
+          "browserReported": "Europe/London",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "locale",
+          "label": "Locale / language",
+          "selected": "en-GB",
+          "guestReported": "en-GB",
+          "browserReported": "en-US",
+          "serverObserved": "en-US",
+          "mismatch": false
+        },
+        {
+          "key": "display",
+          "label": "Display (CSS px for browser)",
+          "selected": "1280x800",
+          "guestReported": "1280x800",
+          "browserReported": "1280x800 @1x",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "cpus",
+          "label": "Logical CPUs",
+          "selected": "2",
+          "guestReported": "2",
+          "browserReported": "2",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "memory",
+          "label": "Memory (browser value is a coarse GB bucket)",
+          "selected": "3072 MB",
+          "guestReported": "2968 MB",
+          "browserReported": "unknown (insecure-context)",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "os",
+          "label": "Operating system",
+          "selected": "linux",
+          "guestReported": "linux",
+          "browserReported": "Linux x86_64",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "chrome",
+          "label": "Chrome version",
+          "selected": null,
+          "guestReported": "154.0.8037.57",
+          "browserReported": "154.0.0.0",
+          "serverObserved": "154.0.0.0",
+          "mismatch": false
+        },
+        {
+          "key": "exit",
+          "label": "Network exit (server-observed)",
+          "selected": "default-nat",
+          "guestReported": null,
+          "browserReported": null,
+          "serverObserved": "127.0.0.1",
+          "mismatch": false
+        }
+      ]
+    },
+    {
+      "id": "run_mujwirwf207cf4f5df",
+      "status": "complete",
+      "reason": null,
+      "treatment": "T4-restarts",
+      "guest": "guest_mujw9h5be57e80d246",
+      "compare": [
+        {
+          "key": "timeZone",
+          "label": "Time zone",
+          "selected": "Europe/London",
+          "guestReported": "Europe/London",
+          "browserReported": "Europe/London",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "locale",
+          "label": "Locale / language",
+          "selected": "en-GB",
+          "guestReported": "en-GB",
+          "browserReported": "en-US",
+          "serverObserved": "en-US",
+          "mismatch": false
+        },
+        {
+          "key": "display",
+          "label": "Display (CSS px for browser)",
+          "selected": "1280x800",
+          "guestReported": "1280x800",
+          "browserReported": "1280x800 @1x",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "cpus",
+          "label": "Logical CPUs",
+          "selected": "2",
+          "guestReported": "2",
+          "browserReported": "2",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "memory",
+          "label": "Memory (browser value is a coarse GB bucket)",
+          "selected": "3072 MB",
+          "guestReported": "2968 MB",
+          "browserReported": "unknown (insecure-context)",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "os",
+          "label": "Operating system",
+          "selected": "linux",
+          "guestReported": "linux",
+          "browserReported": "Linux x86_64",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "chrome",
+          "label": "Chrome version",
+          "selected": null,
+          "guestReported": "154.0.8037.57",
+          "browserReported": "154.0.0.0",
+          "serverObserved": "154.0.0.0",
+          "mismatch": false
+        },
+        {
+          "key": "exit",
+          "label": "Network exit (server-observed)",
+          "selected": "default-nat",
+          "guestReported": null,
+          "browserReported": null,
+          "serverObserved": "127.0.0.1",
+          "mismatch": false
+        }
+      ]
+    }
+  ],
+  "guestEvents": {
+    "guest_mujw9gv4e9595a9664": [
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:08:47.736Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:08:48.043Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:14:54.847Z",
+        "event": "provisioned",
+        "runToken": null,
+        "detail": {}
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:15:23.294Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:15:28.477Z",
+        "event": "agent-report-sent",
+        "runToken": "tok_3e6a01b4ffa4342a02724ed1",
+        "detail": {
+          "result": "HTTP 201"
+        }
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:15:28.479Z",
+        "event": "browser-launched",
+        "runToken": "tok_3e6a01b4ffa4342a02724ed1",
+        "detail": {
+          "browser": "chromium"
+        }
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:15:35.642Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:15:35.946Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:15:59.468Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:16:04.619Z",
+        "event": "agent-report-sent",
+        "runToken": "tok_85ea2085a81fb4d0c2b6c3a9",
+        "detail": {
+          "result": "HTTP 201"
+        }
+      },
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "at": "2026-09-27T14:16:04.621Z",
+        "event": "browser-launched",
+        "runToken": "tok_85ea2085a81fb4d0c2b6c3a9",
+        "detail": {
+          "browser": "chromium"
+        }
+      }
+    ],
+    "guest_mujw9h5be57e80d246": [
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:08:48.392Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:08:48.698Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:13:59.119Z",
+        "event": "provisioned",
+        "runToken": null,
+        "detail": {}
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:14:26.506Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:15:26.872Z",
+        "event": "agent-report-sent",
+        "runToken": "tok_11f33590cbc04b6d2454f5de",
+        "detail": {
+          "result": "HTTP 201"
+        }
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:15:26.873Z",
+        "event": "browser-launched",
+        "runToken": "tok_11f33590cbc04b6d2454f5de",
+        "detail": {
+          "browser": "chromium"
+        }
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:15:36.327Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:15:36.631Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:16:00.080Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:16:05.254Z",
+        "event": "agent-report-sent",
+        "runToken": "tok_5d541bade15e2ca6109d291d",
+        "detail": {
+          "result": "HTTP 201"
+        }
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "at": "2026-09-27T14:16:05.255Z",
+        "event": "browser-launched",
+        "runToken": "tok_5d541bade15e2ca6109d291d",
+        "detail": {
+          "browser": "chromium"
+        }
+      }
+    ]
+  },
+  "performance": {
+    "generatedAt": "2026-09-27T14:16:10.869Z",
+    "hostId": "host_pilot2",
+    "guests": [
+      {
+        "guestId": "guest_mujw9gv4e9595a9664",
+        "name": "guest-A",
+        "presetId": "preset_mujw9gkr401f77f097",
+        "starts": 2,
+        "controlReadyMs": {
+          "n": 2,
+          "median": 305.5,
+          "p90": 306.7,
+          "p95": 306.85,
+          "max": 307
+        },
+        "desktopReadyMs": {
+          "n": 2,
+          "median": 209692,
+          "p90": 358384.8,
+          "p95": 376971.39999999997,
+          "max": 395558
+        },
+        "browserLaunchMs": {
+          "n": 2,
+          "median": 214861,
+          "p90": 363566.60000000003,
+          "p95": 382154.8,
+          "max": 400743
+        },
+        "idleRssMb": {
+          "n": 41,
+          "median": 799.5,
+          "p90": 1687.8,
+          "p95": 1777,
+          "max": 2343.7
+        },
+        "activeRssMb": {
+          "n": 46,
+          "median": 739.8,
+          "p90": 1936.9,
+          "p95": 2126.45,
+          "max": 2244.1
+        },
+        "cpuPct": {
+          "n": 87,
+          "median": 11.9,
+          "p90": 123.86000000000001,
+          "p95": 134.19,
+          "max": 205.6
+        },
+        "diskGrowthMb": 2714,
+        "powerSources": [
+          "AC Power",
+          "Battery Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 87
+      },
+      {
+        "guestId": "guest_mujw9h5be57e80d246",
+        "name": "guest-B",
+        "presetId": "preset_mujw9gkr401f77f097",
+        "starts": 2,
+        "controlReadyMs": {
+          "n": 2,
+          "median": 305,
+          "p90": 305.8,
+          "p95": 305.9,
+          "max": 306
+        },
+        "desktopReadyMs": {
+          "n": 2,
+          "median": 180933.5,
+          "p90": 306677.9,
+          "p95": 322395.95,
+          "max": 338114
+        },
+        "browserLaunchMs": {
+          "n": 2,
+          "median": 213704.5,
+          "p90": 361525.7,
+          "p95": 380003.35,
+          "max": 398481
+        },
+        "idleRssMb": {
+          "n": 35,
+          "median": 784.3,
+          "p90": 1046.8,
+          "p95": 1100.1799999999996,
+          "max": 1460.6
+        },
+        "activeRssMb": {
+          "n": 52,
+          "median": 1138.1999999999998,
+          "p90": 1700.33,
+          "p95": 2148.8699999999994,
+          "max": 2466.2
+        },
+        "cpuPct": {
+          "n": 87,
+          "median": 17.1,
+          "p90": 107.48000000000005,
+          "p95": 119.73000000000002,
+          "max": 196.6
+        },
+        "diskGrowthMb": 2709,
+        "powerSources": [
+          "AC Power",
+          "Battery Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 87
+      }
+    ],
+    "maxConcurrentGuests": 2,
+    "note": "Idle RSS = samples with CPU < 10%. Desktop-ready = guest runner started after autologin. Browser launch = runner opened the study page. Report medians and tails; a single run is not a benchmark."
+  },
+  "finishedAt": "2026-09-27T14:16:10.870Z"
+}

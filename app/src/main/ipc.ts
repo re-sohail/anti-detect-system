@@ -8,7 +8,7 @@ import { CHANNELS, type Channel, type In, type Out, type Result } from '@common/
 import { AppError, toErrorShape } from './errors';
 import type { Ctx } from './services/context';
 import type { GuestService } from './services/guests';
-import { registerImage, verifyImage } from './services/images';
+import { promoteGuestToImage, registerImage, verifyImage } from './services/images';
 import { checkPreset, previewPreset, savePreset } from './services/presets';
 import type { RunService } from './services/runs';
 import type { SettingsService } from './settings';
@@ -41,6 +41,7 @@ const INPUTS: { [C in Channel]: z.ZodType<In<C>> } = {
     expectedSha256: z.string().regex(/^([a-fA-F0-9]{64}|[a-fA-F0-9]{128})$/).optional().or(z.literal('').transform(() => undefined)),
   }),
   'images.verify': id,
+  'images.promoteGuest': z.object({ guestId: z.string().min(1), name: z.string().min(1).max(120), version: z.string().min(1).max(60) }),
   'presets.list': nothing,
   'presets.preview': z.object({ input: z.unknown(), baseId: z.string().optional() }),
   'presets.save': z.object({ input: PresetInput, baseId: z.string().optional() }),
@@ -112,6 +113,7 @@ function handlers(s: Services): { [C in Channel]: (input: In<C>, win: BrowserWin
       return registerImage(ctx, pick.filePaths[0], meta);
     },
     'images.verify': ({ id }) => verifyImage(ctx, id),
+    'images.promoteGuest': ({ guestId, name, version }) => promoteGuestToImage(ctx, guestId, name, version),
     'presets.list': () => ctx.db.listPresets(),
     'presets.preview': ({ input, baseId }) => previewPreset(ctx, input, baseId),
     'presets.save': ({ input, baseId }) => savePreset(ctx, input, baseId),

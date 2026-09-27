@@ -1,0 +1,829 @@
+{
+  "startedAt": "2026-09-27T15:11:25.141Z",
+  "collector": "http://localhost:4100",
+  "image": {
+    "id": "img_mujyh1un25651344a9",
+    "sha256": "0b81a35baf589c24a6b7a8545c142d8dd9296ae4173b9889a4aa431eded8d679",
+    "derivedFrom": {
+      "imageId": "img_mujwtlo808e3475abf",
+      "imageSha256": "3fa2da19de8343bc144517d15bab29a90352482640d326939c9756af4f553f7b",
+      "guestId": "guest_mujwtnf91311e8b0e4",
+      "presetId": "preset_mujwtn2d6c50f87730",
+      "presetVersion": 1,
+      "builtAt": "2026-09-27T15:10:46.612Z"
+    }
+  },
+  "provisioningMs": {
+    "guest_mujyi2wef17b8ecb2d": 24710,
+    "guest_mujyi53f6e58ba680c": 24418
+  },
+  "checks": {
+    "R1: A planted a token in run 1": true,
+    "R1: A retained its token after restart": true,
+    "R1: B never saw a token": true,
+    "C17: A and B share one server-observed exit": true,
+    "all four runs complete": true
+  },
+  "settleSeconds": 60,
+  "runs": [
+    {
+      "id": "run_mujyj09xfc15f728d4",
+      "status": "complete",
+      "reason": null,
+      "treatment": "T2-vms-one-host",
+      "guest": "guest_mujyi2wef17b8ecb2d",
+      "compare": [
+        {
+          "key": "timeZone",
+          "label": "Time zone",
+          "selected": "Europe/London",
+          "guestReported": "Europe/London",
+          "browserReported": "Europe/London",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "locale",
+          "label": "Locale / language",
+          "selected": "en-GB",
+          "guestReported": "en-GB",
+          "browserReported": "en-GB",
+          "serverObserved": "en-GB",
+          "mismatch": false
+        },
+        {
+          "key": "display",
+          "label": "Display (CSS px for browser)",
+          "selected": "1280x800",
+          "guestReported": "1280x800",
+          "browserReported": "1280x800 @1x",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "cpus",
+          "label": "Logical CPUs",
+          "selected": "2",
+          "guestReported": "2",
+          "browserReported": "2",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "memory",
+          "label": "Memory (browser value is a coarse GB bucket)",
+          "selected": "3072 MB",
+          "guestReported": "2968 MB",
+          "browserReported": "unknown (insecure-context)",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "os",
+          "label": "Operating system",
+          "selected": "linux",
+          "guestReported": "linux",
+          "browserReported": "Linux x86_64",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "chrome",
+          "label": "Chrome version",
+          "selected": null,
+          "guestReported": "154.0.8037.57",
+          "browserReported": "154.0.0.0",
+          "serverObserved": "154.0.0.0",
+          "mismatch": false
+        },
+        {
+          "key": "exit",
+          "label": "Network exit (server-observed)",
+          "selected": "default-nat",
+          "guestReported": null,
+          "browserReported": null,
+          "serverObserved": "127.0.0.1",
+          "mismatch": false
+        }
+      ]
+    },
+    {
+      "id": "run_mujyj0aj60a0572fe0",
+      "status": "complete",
+      "reason": null,
+      "treatment": "T2-vms-one-host",
+      "guest": "guest_mujyi53f6e58ba680c",
+      "compare": [
+        {
+          "key": "timeZone",
+          "label": "Time zone",
+          "selected": "Europe/London",
+          "guestReported": "Europe/London",
+          "browserReported": "Europe/London",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "locale",
+          "label": "Locale / language",
+          "selected": "en-GB",
+          "guestReported": "en-GB",
+          "browserReported": "en-GB",
+          "serverObserved": "en-GB",
+          "mismatch": false
+        },
+        {
+          "key": "display",
+          "label": "Display (CSS px for browser)",
+          "selected": "1280x800",
+          "guestReported": "1280x800",
+          "browserReported": "1280x800 @1x",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "cpus",
+          "label": "Logical CPUs",
+          "selected": "2",
+          "guestReported": "2",
+          "browserReported": "2",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "memory",
+          "label": "Memory (browser value is a coarse GB bucket)",
+          "selected": "3072 MB",
+          "guestReported": "2968 MB",
+          "browserReported": "unknown (insecure-context)",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "os",
+          "label": "Operating system",
+          "selected": "linux",
+          "guestReported": "linux",
+          "browserReported": "Linux x86_64",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "chrome",
+          "label": "Chrome version",
+          "selected": null,
+          "guestReported": "154.0.8037.57",
+          "browserReported": "154.0.0.0",
+          "serverObserved": "154.0.0.0",
+          "mismatch": false
+        },
+        {
+          "key": "exit",
+          "label": "Network exit (server-observed)",
+          "selected": "default-nat",
+          "guestReported": null,
+          "browserReported": null,
+          "serverObserved": "127.0.0.1",
+          "mismatch": false
+        }
+      ]
+    },
+    {
+      "id": "run_mujylikt39ddca8ea1",
+      "status": "complete",
+      "reason": null,
+      "treatment": "T4-restarts",
+      "guest": "guest_mujyi2wef17b8ecb2d",
+      "compare": [
+        {
+          "key": "timeZone",
+          "label": "Time zone",
+          "selected": "Europe/London",
+          "guestReported": "Europe/London",
+          "browserReported": "Europe/London",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "locale",
+          "label": "Locale / language",
+          "selected": "en-GB",
+          "guestReported": "en-GB",
+          "browserReported": "en-GB",
+          "serverObserved": "en-GB",
+          "mismatch": false
+        },
+        {
+          "key": "display",
+          "label": "Display (CSS px for browser)",
+          "selected": "1280x800",
+          "guestReported": "1280x800",
+          "browserReported": "1280x800 @1x",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "cpus",
+          "label": "Logical CPUs",
+          "selected": "2",
+          "guestReported": "2",
+          "browserReported": "2",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "memory",
+          "label": "Memory (browser value is a coarse GB bucket)",
+          "selected": "3072 MB",
+          "guestReported": "2968 MB",
+          "browserReported": "unknown (insecure-context)",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "os",
+          "label": "Operating system",
+          "selected": "linux",
+          "guestReported": "linux",
+          "browserReported": "Linux x86_64",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "chrome",
+          "label": "Chrome version",
+          "selected": null,
+          "guestReported": "154.0.8037.57",
+          "browserReported": "154.0.0.0",
+          "serverObserved": "154.0.0.0",
+          "mismatch": false
+        },
+        {
+          "key": "exit",
+          "label": "Network exit (server-observed)",
+          "selected": "default-nat",
+          "guestReported": null,
+          "browserReported": null,
+          "serverObserved": "127.0.0.1",
+          "mismatch": false
+        }
+      ]
+    },
+    {
+      "id": "run_mujylikp2b0c7b75b0",
+      "status": "complete",
+      "reason": null,
+      "treatment": "T4-restarts",
+      "guest": "guest_mujyi53f6e58ba680c",
+      "compare": [
+        {
+          "key": "timeZone",
+          "label": "Time zone",
+          "selected": "Europe/London",
+          "guestReported": "Europe/London",
+          "browserReported": "Europe/London",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "locale",
+          "label": "Locale / language",
+          "selected": "en-GB",
+          "guestReported": "en-GB",
+          "browserReported": "en-GB",
+          "serverObserved": "en-GB",
+          "mismatch": false
+        },
+        {
+          "key": "display",
+          "label": "Display (CSS px for browser)",
+          "selected": "1280x800",
+          "guestReported": "1280x800",
+          "browserReported": "1280x800 @1x",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "cpus",
+          "label": "Logical CPUs",
+          "selected": "2",
+          "guestReported": "2",
+          "browserReported": "2",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "memory",
+          "label": "Memory (browser value is a coarse GB bucket)",
+          "selected": "3072 MB",
+          "guestReported": "2968 MB",
+          "browserReported": "unknown (insecure-context)",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "os",
+          "label": "Operating system",
+          "selected": "linux",
+          "guestReported": "linux",
+          "browserReported": "Linux x86_64",
+          "serverObserved": null,
+          "mismatch": false
+        },
+        {
+          "key": "chrome",
+          "label": "Chrome version",
+          "selected": null,
+          "guestReported": "154.0.8037.57",
+          "browserReported": "154.0.0.0",
+          "serverObserved": "154.0.0.0",
+          "mismatch": false
+        },
+        {
+          "key": "exit",
+          "label": "Network exit (server-observed)",
+          "selected": "default-nat",
+          "guestReported": null,
+          "browserReported": null,
+          "serverObserved": "127.0.0.1",
+          "mismatch": false
+        }
+      ]
+    }
+  ],
+  "guestEvents": {
+    "guest_mujyi2wef17b8ecb2d": [
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:11:33.733Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:11:34.041Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:11:58.174Z",
+        "event": "provisioned",
+        "runToken": null,
+        "detail": {}
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:11:58.443Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:12:23.293Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:12:23.461Z",
+        "event": "agent-report-sent",
+        "runToken": "tok_ac9f755effc822f08125e93a",
+        "detail": {
+          "result": "HTTP 201"
+        }
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:12:23.463Z",
+        "event": "browser-launched",
+        "runToken": "tok_ac9f755effc822f08125e93a",
+        "detail": {
+          "browser": "chromium"
+        }
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:13:35.908Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:13:36.214Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:13:59.922Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:14:10.062Z",
+        "event": "agent-report-sent",
+        "runToken": "tok_4c7a7af1f9a29257d2cbbd4c",
+        "detail": {
+          "result": "HTTP 201"
+        }
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "at": "2026-09-27T15:14:10.063Z",
+        "event": "browser-launched",
+        "runToken": "tok_4c7a7af1f9a29257d2cbbd4c",
+        "detail": {
+          "browser": "chromium"
+        }
+      }
+    ],
+    "guest_mujyi53f6e58ba680c": [
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:11:36.917Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:11:37.223Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:12:01.006Z",
+        "event": "provisioned",
+        "runToken": null,
+        "detail": {}
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:12:01.335Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:12:27.182Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:12:27.363Z",
+        "event": "agent-report-sent",
+        "runToken": "tok_d8de1b75282bfacbd1d9bc35",
+        "detail": {
+          "result": "HTTP 201"
+        }
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:12:27.365Z",
+        "event": "browser-launched",
+        "runToken": "tok_d8de1b75282bfacbd1d9bc35",
+        "detail": {
+          "browser": "chromium"
+        }
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:13:39.122Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:13:39.427Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:14:02.562Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:14:12.741Z",
+        "event": "agent-report-sent",
+        "runToken": "tok_8fc54fba26526457f5a74e87",
+        "detail": {
+          "result": "HTTP 201"
+        }
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "at": "2026-09-27T15:14:12.742Z",
+        "event": "browser-launched",
+        "runToken": "tok_8fc54fba26526457f5a74e87",
+        "detail": {
+          "browser": "chromium"
+        }
+      }
+    ]
+  },
+  "performance": {
+    "generatedAt": "2026-09-27T15:14:17.790Z",
+    "hostId": "host_pilot2",
+    "guests": [
+      {
+        "guestId": "guest_mujwtnf91311e8b0e4",
+        "name": "guest-A",
+        "presetId": "preset_mujwtn2d6c50f87730",
+        "starts": 1,
+        "controlReadyMs": {
+          "n": 1,
+          "median": 305,
+          "p90": 305,
+          "p95": 305,
+          "max": 305
+        },
+        "provisioningBootMs": {
+          "n": 1,
+          "median": 1100702,
+          "p90": 1100702,
+          "p95": 1100702,
+          "max": 1100702
+        },
+        "desktopReadyMs": {
+          "n": 0,
+          "median": null,
+          "p90": null,
+          "p95": null,
+          "max": null
+        },
+        "browserLaunchMs": {
+          "n": 0,
+          "median": null,
+          "p90": null,
+          "p95": null,
+          "max": null
+        },
+        "idleRssMb": {
+          "n": 461,
+          "median": 391.7,
+          "p90": 900.1,
+          "p95": 1196.4,
+          "max": 3335.2
+        },
+        "activeRssMb": {
+          "n": 80,
+          "median": 946.95,
+          "p90": 3280.660000000001,
+          "p95": 3638.6499999999996,
+          "max": 3759.8
+        },
+        "cpuPct": {
+          "n": 541,
+          "median": 1.7,
+          "p90": 13,
+          "p95": 16,
+          "max": 132.9
+        },
+        "diskGrowthMb": 2708,
+        "powerSources": [
+          "Battery Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 541
+      },
+      {
+        "guestId": "guest_mujwtnr0140938e0be",
+        "name": "guest-B",
+        "presetId": "preset_mujwtn2d6c50f87730",
+        "starts": 1,
+        "controlReadyMs": {
+          "n": 1,
+          "median": 305,
+          "p90": 305,
+          "p95": 305,
+          "max": 305
+        },
+        "provisioningBootMs": {
+          "n": 0,
+          "median": null,
+          "p90": null,
+          "p95": null,
+          "max": null
+        },
+        "desktopReadyMs": {
+          "n": 0,
+          "median": null,
+          "p90": null,
+          "p95": null,
+          "max": null
+        },
+        "browserLaunchMs": {
+          "n": 0,
+          "median": null,
+          "p90": null,
+          "p95": null,
+          "max": null
+        },
+        "idleRssMb": {
+          "n": 473,
+          "median": 277.5,
+          "p90": 1799.3600000000022,
+          "p95": 1919.1399999999999,
+          "max": 3225.3
+        },
+        "activeRssMb": {
+          "n": 68,
+          "median": 1638.95,
+          "p90": 3135.56,
+          "p95": 3163.43,
+          "max": 3225.4
+        },
+        "cpuPct": {
+          "n": 541,
+          "median": 2.1,
+          "p90": 10.9,
+          "p95": 13.9,
+          "max": 458.1
+        },
+        "diskGrowthMb": 689,
+        "powerSources": [
+          "Battery Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 541
+      },
+      {
+        "guestId": "guest_mujyi2wef17b8ecb2d",
+        "name": "guest-A-i0nu",
+        "presetId": "preset_mujyi0ns5098174c41",
+        "starts": 2,
+        "controlReadyMs": {
+          "n": 2,
+          "median": 307,
+          "p90": 307.8,
+          "p95": 307.9,
+          "max": 308
+        },
+        "provisioningBootMs": {
+          "n": 1,
+          "median": 24710,
+          "p90": 24710,
+          "p95": 24710,
+          "max": 24710
+        },
+        "desktopReadyMs": {
+          "n": 1,
+          "median": 24014,
+          "p90": 24014,
+          "p95": 24014,
+          "max": 24014
+        },
+        "browserLaunchMs": {
+          "n": 1,
+          "median": 34155,
+          "p90": 34155,
+          "p95": 34155,
+          "max": 34155
+        },
+        "idleRssMb": {
+          "n": 22,
+          "median": 1864.65,
+          "p90": 2253,
+          "p95": 2266.3,
+          "max": 2276.9
+        },
+        "activeRssMb": {
+          "n": 10,
+          "median": 1543.45,
+          "p90": 2279.2200000000003,
+          "p95": 2330.61,
+          "max": 2382
+        },
+        "cpuPct": {
+          "n": 32,
+          "median": 4.25,
+          "p90": 91.72000000000001,
+          "p95": 134.81499999999997,
+          "max": 177.6
+        },
+        "diskGrowthMb": 65,
+        "powerSources": [
+          "Battery Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 32
+      },
+      {
+        "guestId": "guest_mujyi53f6e58ba680c",
+        "name": "guest-B-i0nu",
+        "presetId": "preset_mujyi0ns5098174c41",
+        "starts": 2,
+        "controlReadyMs": {
+          "n": 2,
+          "median": 305.5,
+          "p90": 305.9,
+          "p95": 305.95,
+          "max": 306
+        },
+        "provisioningBootMs": {
+          "n": 1,
+          "median": 24418,
+          "p90": 24418,
+          "p95": 24418,
+          "max": 24418
+        },
+        "desktopReadyMs": {
+          "n": 1,
+          "median": 23440,
+          "p90": 23440,
+          "p95": 23440,
+          "max": 23440
+        },
+        "browserLaunchMs": {
+          "n": 1,
+          "median": 33620,
+          "p90": 33620,
+          "p95": 33620,
+          "max": 33620
+        },
+        "idleRssMb": {
+          "n": 26,
+          "median": 1926.5,
+          "p90": 2363.4,
+          "p95": 2366.6,
+          "max": 2379.5
+        },
+        "activeRssMb": {
+          "n": 5,
+          "median": 736.7,
+          "p90": 1355.52,
+          "p95": 1402.6599999999999,
+          "max": 1449.8
+        },
+        "cpuPct": {
+          "n": 31,
+          "median": 1.8,
+          "p90": 82.4,
+          "p95": 111.6,
+          "max": 157.3
+        },
+        "diskGrowthMb": 64,
+        "powerSources": [
+          "Battery Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 31
+      }
+    ],
+    "maxConcurrentGuests": 2,
+    "note": "Idle RSS = samples with CPU < 10%. Desktop-ready = guest runner started after autologin, normal boots only; provisioning boots (package installation) are reported separately. Browser launch = runner opened the study page. Report medians and tails; a single run is not a benchmark."
+  },
+  "finishedAt": "2026-09-27T15:14:17.794Z"
+}

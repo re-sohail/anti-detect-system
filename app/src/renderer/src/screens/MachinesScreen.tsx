@@ -121,6 +121,12 @@ function GuestCard({ g, presetName, busy, doAct }: {
               Reset to “{s}”
             </button>
           ))}
+          {g.provisioning.provisionedAt && (
+            <button disabled={busy} title="Only for a builder guest that never ran a study visit"
+              onClick={() => doAct('promote', () => call('images.promoteGuest', { guestId: g.id, name: `${g.name} base`, version: new Date().toISOString().slice(0, 10) }))}>
+              Build base image from this guest
+            </button>
+          )}
           <span style={{ flex: 1 }} />
           {confirm === null ? (
             <button className="danger" onClick={() => setConfirm('')}>Delete…</button>

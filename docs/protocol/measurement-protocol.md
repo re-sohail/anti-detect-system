@@ -27,6 +27,11 @@ Change **one factor at a time** in the first pass.
 - At least one held-out-host split (default 50 % of hosts). A held-out-time split if a cutoff date is set.
 - The detector is frozen (`freeze`) before the held-out set is released (`release`).
 
+## 4a. Guests and restarts
+- Create study guests only from a versioned base image built from a clean builder guest (Machines → *Build base image from this guest*); record its SHA-256 and provenance (D-014). Do not provision from the internet during collection.
+- Before any restart in T4 or R1 tests, let the browser run ≥ 60 s after the last visit (D-015).
+- Serve the collector over HTTPS with a certificate the guests trust (D-010).
+
 ## 5. Per-run procedure
 1. Pre-run checklist (`checklists.md`).
 2. In the app: Runs → Start run (environment type, label, consent for physical controls, product details for vendor runs).

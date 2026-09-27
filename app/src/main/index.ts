@@ -68,6 +68,7 @@ function createServices() {
       return cloudInitUserData({
         guest, preset, exit: getExit(ctx, preset.network.routeId), collectorUrl: settings.get().collectorUrl,
         runnerBaseUrl: guestBaseUrl(provisionPort, guest.id, guest.provisioning.secret), agentSource: readAgentSource(agentPath),
+        packagesPreinstalled: !!db.getImage(guest.imageId)?.derivedFrom,
       });
     },
     currentRun: (guest) => runs.openRunFor(guest.id),

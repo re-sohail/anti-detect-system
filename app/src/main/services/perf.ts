@@ -101,6 +101,9 @@ export interface PerfReport {
     presetId: string;
     starts: number;
     controlReadyMs: Stat;
+    /** First boot of a cloud-init guest, including package installation. */
+    provisioningBootMs: Stat;
+    /** Later boots only. */
     desktopReadyMs: Stat;
     browserLaunchMs: Stat;
     idleRssMb: Stat;
@@ -123,14 +126,18 @@ export function perfReport(ctx: Ctx): PerfReport {
   const events = ctx.db.guestEvents();
   const samples = ctx.db.samples();
 
-  // Pair each start with the next milestones of the same guest.
-  const durations = (guestId: string, target: string) => {
+  // Pair each start with the next milestones of the same guest. A start during which the guest
+  // reported 'provisioned' is a provisioning boot (package installation) and is reported apart.
+  const durations = (guestId: string, target: string, kind: 'normal' | 'provisioning' | 'any' = 'normal') => {
     const evs = events.filter((e) => e.guestId === guestId);
     const out: number[] = [];
     evs.forEach((e, i) => {
       if (e.event !== 'start-requested') return;
       const nextStart = evs.findIndex((x, j) => j > i && x.event === 'start-requested');
-      const hit = evs.find((x, j) => j > i && (nextStart < 0 || j < nextStart) && x.event === target);
+      const inWindow = (j: number) => j > i && (nextStart < 0 || j < nextStart);
+      const provisioning = evs.some((x, j) => inWindow(j) && x.event === 'provisioned');
+      if (kind !== 'any' && (kind === 'provisioning') !== provisioning) return;
+      const hit = evs.find((x, j) => inWindow(j) && x.event === target);
       if (hit) out.push(Date.parse(hit.at) - Date.parse(e.at));
     });
     return out;
@@ -156,7 +163,8 @@ export function perfReport(ctx: Ctx): PerfReport {
         name: g.name,
         presetId: g.presetId,
         starts: events.filter((e) => e.guestId === g.id && e.event === 'start-requested').length,
-        controlReadyMs: stat(durations(g.id, 'control-ready')),
+        controlReadyMs: stat(durations(g.id, 'control-ready', 'any')),
+        provisioningBootMs: stat(durations(g.id, 'runner-started', 'provisioning')),
         desktopReadyMs: stat(durations(g.id, 'runner-started')),
         browserLaunchMs: stat(durations(g.id, 'browser-launched')),
         idleRssMb: stat(rss((s) => s.cpu_pct !== null && s.cpu_pct < IDLE_CPU)),
@@ -169,6 +177,6 @@ export function perfReport(ctx: Ctx): PerfReport {
       };
     }),
     maxConcurrentGuests: Math.max(0, ...[...buckets.values()].map((s) => s.size)),
-    note: `Idle RSS = samples with CPU < ${IDLE_CPU}%. Desktop-ready = guest runner started after autologin. Browser launch = runner opened the study page. Report medians and tails; a single run is not a benchmark.`,
+    note: `Idle RSS = samples with CPU < ${IDLE_CPU}%. Desktop-ready = guest runner started after autologin, normal boots only; provisioning boots (package installation) are reported separately. Browser launch = runner opened the study page. Report medians and tails; a single run is not a benchmark.`,
   };
 }

@@ -1,0 +1,182 @@
+{
+  "startedAt": "2026-09-27T14:24:26.358Z",
+  "collector": "http://localhost:4100",
+  "error": "timed out waiting for both guests provisioned and on the desktop",
+  "guestEvents": {
+    "guest_mujwtnf91311e8b0e4": [
+      {
+        "guestId": "guest_mujwtnf91311e8b0e4",
+        "at": "2026-09-27T14:24:29.505Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujwtnf91311e8b0e4",
+        "at": "2026-09-27T14:24:29.810Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      },
+      {
+        "guestId": "guest_mujwtnf91311e8b0e4",
+        "at": "2026-09-27T14:42:22.510Z",
+        "event": "provisioned",
+        "runToken": null,
+        "detail": {}
+      },
+      {
+        "guestId": "guest_mujwtnf91311e8b0e4",
+        "at": "2026-09-27T14:42:50.207Z",
+        "event": "runner-started",
+        "runToken": null,
+        "detail": {
+          "agentVersion": "1.0.0"
+        }
+      }
+    ],
+    "guest_mujwtnr0140938e0be": [
+      {
+        "guestId": "guest_mujwtnr0140938e0be",
+        "at": "2026-09-27T14:24:30.251Z",
+        "event": "start-requested",
+        "runToken": null,
+        "detail": {
+          "display": "headless",
+          "conditionSeq": 1
+        }
+      },
+      {
+        "guestId": "guest_mujwtnr0140938e0be",
+        "at": "2026-09-27T14:24:30.556Z",
+        "event": "control-ready",
+        "runToken": null,
+        "detail": null
+      }
+    ]
+  },
+  "performance": {
+    "generatedAt": "2026-09-27T15:09:33.547Z",
+    "hostId": "host_pilot2",
+    "guests": [
+      {
+        "guestId": "guest_mujwtnf91311e8b0e4",
+        "name": "guest-A",
+        "presetId": "preset_mujwtn2d6c50f87730",
+        "starts": 1,
+        "controlReadyMs": {
+          "n": 1,
+          "median": 305,
+          "p90": 305,
+          "p95": 305,
+          "max": 305
+        },
+        "desktopReadyMs": {
+          "n": 1,
+          "median": 1100702,
+          "p90": 1100702,
+          "p95": 1100702,
+          "max": 1100702
+        },
+        "browserLaunchMs": {
+          "n": 0,
+          "median": null,
+          "p90": null,
+          "p95": null,
+          "max": null
+        },
+        "idleRssMb": {
+          "n": 461,
+          "median": 391.7,
+          "p90": 900.1,
+          "p95": 1196.4,
+          "max": 3335.2
+        },
+        "activeRssMb": {
+          "n": 80,
+          "median": 946.95,
+          "p90": 3280.660000000001,
+          "p95": 3638.6499999999996,
+          "max": 3759.8
+        },
+        "cpuPct": {
+          "n": 541,
+          "median": 1.7,
+          "p90": 13,
+          "p95": 16,
+          "max": 132.9
+        },
+        "diskGrowthMb": 2708,
+        "powerSources": [
+          "Battery Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 541
+      },
+      {
+        "guestId": "guest_mujwtnr0140938e0be",
+        "name": "guest-B",
+        "presetId": "preset_mujwtn2d6c50f87730",
+        "starts": 1,
+        "controlReadyMs": {
+          "n": 1,
+          "median": 305,
+          "p90": 305,
+          "p95": 305,
+          "max": 305
+        },
+        "desktopReadyMs": {
+          "n": 0,
+          "median": null,
+          "p90": null,
+          "p95": null,
+          "max": null
+        },
+        "browserLaunchMs": {
+          "n": 0,
+          "median": null,
+          "p90": null,
+          "p95": null,
+          "max": null
+        },
+        "idleRssMb": {
+          "n": 473,
+          "median": 277.5,
+          "p90": 1799.3600000000022,
+          "p95": 1919.1399999999999,
+          "max": 3225.3
+        },
+        "activeRssMb": {
+          "n": 68,
+          "median": 1638.95,
+          "p90": 3135.56,
+          "p95": 3163.43,
+          "max": 3225.4
+        },
+        "cpuPct": {
+          "n": 541,
+          "median": 2.1,
+          "p90": 10.9,
+          "p95": 13.9,
+          "max": 458.1
+        },
+        "diskGrowthMb": 689,
+        "powerSources": [
+          "Battery Power"
+        ],
+        "thermalStates": [
+          "no-warning"
+        ],
+        "samples": 541
+      }
+    ],
+    "maxConcurrentGuests": 2,
+    "note": "Idle RSS = samples with CPU < 10%. Desktop-ready = guest runner started after autologin. Browser launch = runner opened the study page. Report medians and tails; a single run is not a benchmark."
+  },
+  "finishedAt": "2026-09-27T15:09:33.552Z"
+}

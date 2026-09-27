@@ -8,7 +8,7 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from typing import Any
 
-from .common import family_of
+from .common import family_of, obs_key
 
 
 def coverage(merged: dict) -> dict[str, Any]:
@@ -36,7 +36,7 @@ def stability(merged: dict) -> dict[str, Any]:
         for a, b in zip(visits, visits[1:]):
             for fid in set(a["observations"]) | set(b["observations"]):
                 total[fid] += 1
-                if a["observations"].get(fid) == b["observations"].get(fid):
+                if obs_key(a["observations"].get(fid)) == obs_key(b["observations"].get(fid)):
                     same[fid] += 1
     return {"fields": {f: {"consecutivePairs": total[f], "unchangedRate": same[f] / total[f]} for f in sorted(total)},
             "guestsWithRepeats": sum(1 for v in by_guest.values() if len(v) > 1)}

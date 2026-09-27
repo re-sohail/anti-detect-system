@@ -10,7 +10,7 @@ import math
 import random
 from typing import Any
 
-from .common import FAMILIES, VOLATILE_FIELDS
+from .common import FAMILIES, VOLATILE_FIELDS, obs_key
 from .features import pair_features
 
 SUBMISSION_SCHEMA = "lvd-detector-submission/1"
@@ -21,8 +21,8 @@ def _index(doc: dict) -> dict[str, dict]:
 
 
 def _profile(v: dict) -> str:
-    stable = {k: o for k, o in v["observations"].items() if k not in VOLATILE_FIELDS}
-    return repr(sorted((k, repr(o)) for k, o in stable.items())) + repr(sorted(v["headers"].items()))
+    stable = sorted((k, obs_key(o)) for k, o in v["observations"].items() if k not in VOLATILE_FIELDS)
+    return repr(stable) + repr(sorted(v["headers"].items()))
 
 
 class Logistic:

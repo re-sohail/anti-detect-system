@@ -121,7 +121,7 @@ export interface PerfReport {
   hostId: string;
   guests: Array<{
     guestId: string; name: string; presetId: string; starts: number;
-    controlReadyMs: Stat; desktopReadyMs: Stat; browserLaunchMs: Stat;
+    controlReadyMs: Stat; provisioningBootMs: Stat; desktopReadyMs: Stat; browserLaunchMs: Stat;
     idleRssMb: Stat; activeRssMb: Stat; cpuPct: Stat;
     diskGrowthMb: number | null; powerSources: string[]; thermalStates: string[]; samples: number;
   }>;
@@ -158,6 +158,7 @@ export interface Channels {
   'images.list': [void, ImageRecord[]];
   'images.pickAndRegister': [ImageMeta, ImageRecord | null];
   'images.verify': [{ id: string }, { id: string; match: boolean; actual: string }];
+  'images.promoteGuest': [{ guestId: string; name: string; version: string }, ImageRecord];
   'presets.list': [void, Preset[]];
   'presets.preview': [{ input: unknown; baseId?: string }, { valid: boolean; issues: string[]; diff: DiffEntry[] }];
   'presets.save': [{ input: PresetInput; baseId?: string }, Preset];
@@ -197,7 +198,7 @@ export type Out<C extends Channel> = Channels[C][1];
 
 export const CHANNELS = [
   'host.probe', 'settings.get', 'settings.set',
-  'images.list', 'images.pickAndRegister', 'images.verify',
+  'images.list', 'images.pickAndRegister', 'images.verify', 'images.promoteGuest',
   'presets.list', 'presets.preview', 'presets.save', 'presets.check',
   'guests.list', 'guests.create', 'guests.start', 'guests.stop', 'guests.pause', 'guests.resume',
   'guests.snapshot', 'guests.reset', 'guests.delete',

@@ -205,3 +205,38 @@ class ProtocolToolsTest(unittest.TestCase):
         self.assertIn("not measured", row["storageSeparation"])
         self.assertIn("virtual", row["hardwareProvenance"])
         self.assertTrue(row["evidenceRuns"])
+
+
+class RealDataRegressionTest(unittest.TestCase):
+    """Bugs found when the toolkit first ran on real pilot data (2026-09-27)."""
+
+    def _merged(self):
+        base = {"instrumentVersion": "1.1.0", "clockOffsetMs": 0, "peerIp": "127.0.0.1", "headers": {}, "guestReport": None}
+        t = {"host": "h1", "runId": "r", "treatment": "T4-restarts", "environmentKind": "managed-guest", "environmentLabel": "A",
+             "product": None, "routeId": "default-nat", "exitKind": "default-nat", "guestOs": "linux", "hostOs": "darwin"}
+        def v(i, guest, dur, tok):
+            return {**base, "visitId": f"v{i}", "runToken": f"t{i}", "receivedAt": f"2026-09-27T10:0{i}:00Z",
+                    "observations": {"intl.timeZone": {"status": "ok", "value": "Europe/London", "durationMs": dur},
+                                     "storage.testToken": {"status": "ok", "value": tok}},
+                    "truth": {**t, "guest": guest}}
+        return {"visits": [
+            v(1, "A", 3, {"existingToken": None, "placedToken": "tokA"}),
+            v(2, "A", 9, {"existingToken": None, "placedToken": None}),
+            v(3, "B", 4, {"existingToken": None, "placedToken": None}),
+        ]}
+
+    def test_stability_ignores_collection_timing(self):
+        from lvd_analysis.coverage import stability
+        self.assertEqual(stability(self._merged())["fields"]["intl.timeZone"]["unchangedRate"], 1.0)
+
+    def test_matrix_reports_lost_token_as_measured(self):
+        from lvd_analysis.matrix import build
+        row = build(self._merged())["rows"]["managed-guest"]["storageSeparation"]
+        self.assertIn("1 planted: 0 retained, 1 lost", row)
+        self.assertIn("0 cross-unit", row)
+
+    def test_exact_profile_ignores_collection_timing(self):
+        from lvd_analysis.baselines import _profile
+        a = {"observations": {"intl.timeZone": {"status": "ok", "value": "X", "durationMs": 1}}, "headers": {}}
+        b = {"observations": {"intl.timeZone": {"status": "ok", "value": "X", "durationMs": 7}}, "headers": {}}
+        self.assertEqual(_profile(a), _profile(b))

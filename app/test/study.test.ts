@@ -1,6 +1,7 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import type { AddressInfo } from 'node:net';
@@ -9,7 +10,7 @@ import type { Ctx } from '../src/main/services/context';
 import { openDb } from '../src/main/services/db';
 import { GuestService } from '../src/main/services/guests';
 import { RunService } from '../src/main/services/runs';
-import { registerImage } from '../src/main/services/images';
+import { promoteGuestToImage, registerImage, verifyImage } from '../src/main/services/images';
 import { savePreset, checkPreset } from '../src/main/services/presets';
 import { saveConsent, withdrawConsent } from '../src/main/services/consents';
 import { approveExit, saveExit, getExit } from '../src/main/services/exits';
@@ -85,13 +86,21 @@ describe('provisioning', () => {
     });
     assert.match(ud, /^#cloud-config/);
     assert.match(ud, /timezone: Asia\/Tokyo/);
-    assert.match(ud, /locale: ja_JP\.UTF-8/);
+    assert.doesNotMatch(ud, /^locale:/m, 'cloud-init locale module would fail before packages are installed');
+    const locScript = ud.split('\n').find((l, i, a) => a[i - 3]?.includes('set-locale.sh'))!.split('content: ')[1];
+    assert.match(Buffer.from(locScript, 'base64').toString(), /update-locale LANG=ja_JP\.UTF-8/);
     assert.doesNotMatch(ud, /^\s*(passwd|hashed_passwd|plain_text_passwd):|ssh_authorized_keys/m);
     const policyB64 = ud.split('\n').find((l, i, a) => a[i - 3]?.includes('lvd-study.json'))!.split('content: ')[1];
     const policy = JSON.parse(Buffer.from(policyB64, 'base64').toString());
     assert.deepEqual(policy.URLAllowlist, ['http://10.0.2.2:4100']);
     assert.equal(policy.ProxyServer, 'http://proxy.example:3128');
     assert.equal(chromiumPolicy('https://collector.uni.example', null).ProxyMode, 'direct');
+    const derived = cloudInitUserData({
+      guest: { id: 'guest_abc12345', name: 'A' }, preset: p, exit: null, collectorUrl: 'http://localhost:4100',
+      runnerBaseUrl: 'http://10.0.2.2:4180/g/x/', agentSource: '', packagesPreinstalled: true,
+    });
+    assert.doesNotMatch(derived, /package_update|^packages:/m, 'derived bases skip the package step');
+    assert.match(ud, /^packages:/m);
     assert.equal(toGuestUrl('http://127.0.0.1:4100/t/x'), 'http://10.0.2.2:4100/t/x');
     assert.equal(smbiosSeedArg(4180, 'g1', 's'), 'type=1,serial=ds=nocloud;s=http://10.0.2.2:4180/g/g1/s/');
   });
@@ -142,14 +151,18 @@ describe('performance', () => {
       ('guest_1', '2026-09-27T10:00:02.000Z', 'control-ready'),
       ('guest_1', '2026-09-27T10:00:40.000Z', 'runner-started'),
       ('guest_1', '2026-09-27T11:00:00.000Z', 'start-requested'),
-      ('guest_1', '2026-09-27T11:00:04.000Z', 'control-ready')`);
+      ('guest_1', '2026-09-27T11:00:04.000Z', 'control-ready'),
+      ('guest_1', '2026-09-27T12:00:00.000Z', 'start-requested'),
+      ('guest_1', '2026-09-27T12:05:00.000Z', 'provisioned'),
+      ('guest_1', '2026-09-27T12:06:00.000Z', 'runner-started')`);
     ctx.db.raw.exec(`INSERT INTO samples (guest_id, condition_seq, at, rss_mb, cpu_pct, disk_mb, power) VALUES
       ('guest_1', 1, '2026-09-27T10:01:00Z', 900, 3, 1000, 'AC Power'),
       ('guest_1', 1, '2026-09-27T10:01:05Z', 1400, 80, 1200, 'AC Power')`);
     const g = perfReport(ctx).guests[0];
-    assert.equal(g.starts, 2);
+    assert.equal(g.starts, 3);
     assert.deepEqual([g.controlReadyMs.n, g.controlReadyMs.median], [2, 3000]);
     assert.equal(g.desktopReadyMs.n, 1, 'second start never reached the desktop and is not counted as fast');
+    assert.deepEqual([g.provisioningBootMs.n, g.provisioningBootMs.median], [1, 360_000], 'provisioning boot reported apart');
     assert.equal(g.idleRssMb.median, 900);
     assert.equal(g.activeRssMb.median, 1400);
     assert.equal(g.diskGrowthMb, 200);
@@ -172,5 +185,37 @@ describe('study exports', () => {
     const inv = await hostInventory(ctx, caps);
     assert.match(inv.markdown, /reference host candidate/);
     assert.match((await hostInventory(ctx, { ...caps, totalMemMb: 8192 })).markdown, /pilot-only/);
+  });
+});
+
+describe('base image builder', () => {
+  test('promotes only a clean, provisioned, stopped guest; output is flattened, hashed and records provenance', async (t) => {
+    const qemuImg = ['/opt/homebrew/bin/qemu-img', '/usr/local/bin/qemu-img', '/usr/bin/qemu-img'].find((p) => existsSync(p));
+    if (!qemuImg) return t.skip('qemu-img not installed');
+    const ctx = makeCtx();
+    ctx.probe = async () => ({ ...caps, backends: [{ ...caps.backends[0], qemuImg }] });
+    const src = path.join(ctx.dataDir, 'src.qcow2');
+    execFileSync(qemuImg, ['create', '-f', 'qcow2', src, '64M']);
+    const img = await registerImage(ctx, src, { name: 'Base', version: '1', origin: 'o', guestOs: 'linux', guestArch: 'aarch64', licenseNotes: 'l', provisioning: 'cloud-init' });
+    const p = await presetWithRoute(ctx, 'default-nat');
+    const disk = path.join(ctx.dataDir, 'overlay.qcow2');
+    execFileSync(qemuImg, ['create', '-f', 'qcow2', '-F', 'qcow2', '-b', img.path, disk, '1G']);
+    const now = new Date().toISOString();
+    ctx.db.putGuest({
+      id: 'guest_b', name: 'builder', presetId: p.id, presetVersion: p.version, imageId: img.id, diskPath: disk, state: 'stopped', pid: null,
+      display: 'window', vncPort: null, conditionSeq: 1, lastError: null, createdAt: now, updatedAt: now, snapshots: [],
+      provisioning: { mode: 'cloud-init', secret: 'c'.repeat(32), provisionedAt: now },
+    });
+    const out = await promoteGuestToImage(ctx, 'guest_b', 'Builder base', '2026-09-27');
+    assert.equal(out.derivedFrom?.imageId, img.id);
+    assert.equal(out.derivedFrom?.guestId, 'guest_b');
+    const info = JSON.parse(execFileSync(qemuImg, ['info', '--output=json', out.path]).toString());
+    assert.equal(info['backing-filename'], undefined, 'promoted image must not depend on a backing file');
+    assert.equal((await verifyImage(ctx, out.id)).match, true);
+
+    // A guest that ran study visits is refused (its browser profile is not clean).
+    ctx.db.putRun({ id: 'run_x', runToken: 'tok_x', guestId: 'guest_b', treatment: 'PILOT', status: 'complete', statusReason: null, notes: '',
+      createdAt: now, finishedAt: now, manifestPath: '/x', manifestSha256: 'x', studyUrl: 'x', guestStudyUrl: 'x' });
+    await assert.rejects(promoteGuestToImage(ctx, 'guest_b', 'again', '2'), rejectsWith('conflict'));
   });
 });

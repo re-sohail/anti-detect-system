@@ -5,6 +5,7 @@ import type { ImageMeta } from '@common/ipc';
 import { AppError } from '../errors';
 import type { Ctx } from './context';
 import { hashFile, newId, sha256File } from './hash';
+import { run } from './exec';
 
 /**
  * Image manager (brief §5): records origin, version, hash, install date and licence notes.
@@ -67,4 +68,49 @@ export async function requireVerifiedImage(ctx: Ctx, id: string): Promise<ImageR
   const v = await verifyImage(ctx, id);
   if (!v.match) throw new AppError('checksum-mismatch', `Base image ${img.name} ${img.version} has changed on disk`, { expected: img.sha256, actual: v.actual });
   return img;
+}
+
+/**
+ * Build a versioned base image from a provisioned guest (brief §11). Only a guest that has never
+ * run a study visit may be promoted, so no browser profile or planted token is carried over.
+ * The copy is flattened (no backing file), hashed, made read-only and records its provenance.
+ * New guests from it re-run cloud-init under their own instance ID, which rewrites their
+ * configuration and secret; installed packages are reused.
+ */
+export async function promoteGuestToImage(ctx: Ctx, guestId: string, name: string, version: string): Promise<ImageRecord> {
+  const g = ctx.db.getGuest(guestId);
+  if (!g) throw new AppError('not-found', `Unknown guest ${guestId}`);
+  if (!['stopped', 'created'].includes(g.state)) throw new AppError('conflict', 'Stop the guest before building an image from it');
+  if (!g.provisioning.provisionedAt) throw new AppError('conflict', 'Guest has not finished provisioning');
+  if (ctx.db.listRuns().some((r) => r.guestId === guestId)) {
+    throw new AppError('conflict', 'This guest has run study visits; its browser profile is not clean. Provision a fresh builder guest.');
+  }
+  const base = ctx.db.getImage(g.imageId);
+  if (!base) throw new AppError('missing-image', 'Source image record missing');
+  if (!ctx.db.getPreset(g.presetId, g.presetVersion)) throw new AppError('not-found', 'Preset version for this guest no longer exists');
+  const qemuImg = (await ctx.probe()).backends[0].qemuImg;
+  if (!qemuImg) throw new AppError('backend-missing', 'qemu-img not found');
+
+  const id = newId('img');
+  const dir = path.join(ctx.dataDir, 'images');
+  mkdirSync(dir, { recursive: true });
+  const dest = path.join(dir, `${id}.qcow2`);
+  const r = await run(qemuImg, ['convert', '-O', 'qcow2', g.diskPath, dest], 30 * 60_000);
+  if (r.code !== 0) {
+    rmSync(dest, { force: true });
+    throw new AppError('internal', `qemu-img convert failed: ${r.stderr.trim()}`);
+  }
+  chmodSync(dest, 0o444);
+  const record = ImageRecord.parse({
+    id, name, version, origin: `derived from ${base.name} ${base.version} via guest ${g.id}`,
+    sha256: await sha256File(dest), sizeBytes: statSync(dest).size, guestOs: base.guestOs, guestArch: base.guestArch,
+    format: 'qcow2', licenseNotes: base.licenseNotes, path: dest, addedAt: new Date().toISOString(), status: 'active',
+    provisioning: 'cloud-init',
+    derivedFrom: {
+      imageId: base.id, imageSha256: base.sha256, guestId: g.id, presetId: g.presetId, presetVersion: g.presetVersion,
+      builtAt: new Date().toISOString(),
+    },
+  });
+  ctx.db.putImage(record);
+  return record;
 }

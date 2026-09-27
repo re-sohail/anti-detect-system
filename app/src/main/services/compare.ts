@@ -31,7 +31,8 @@ export function buildCompare(preset: Preset | null, detail: CollectorRunDetail |
       key: 'locale', label: 'Locale / language',
       selected: s(preset?.regional.locale), guestReported: s(guest?.locale?.split('.')[0]?.replace('_', '-')),
       browserReported: s(langs?.[0]) ?? s(val('intl.locale')), serverObserved: s(headers['accept-language']?.split(',')[0]),
-      norm: (v) => v.toLowerCase().split('-')[0],
+      // Full tag: en-GB and en-US differ (a region mismatch is a mismatch).
+      norm: (v) => v.toLowerCase().replace('_', '-'),
     },
     {
       key: 'display', label: 'Display (CSS px for browser)',

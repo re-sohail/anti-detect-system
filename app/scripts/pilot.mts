@@ -67,7 +67,7 @@ const server = startProvisioningServer(ctx, PORT, {
     const preset = db.getPreset(g.presetId, g.presetVersion)!;
     return cloudInitUserData({
       guest: g, preset, exit: getExit(ctx, preset.network.routeId), collectorUrl: COLLECTOR,
-      runnerBaseUrl: guestBaseUrl(PORT, g.id, g.provisioning.secret!), agentSource: readAgentSource(agentPath),
+      runnerBaseUrl: guestBaseUrl(PORT, g.id, g.provisioning.secret!), agentSource: readAgentSource(agentPath), packagesPreinstalled: !!db.getImage(g.imageId)?.derivedFrom,
     });
   },
   currentRun: (g) => runs.openRunFor(g.id),

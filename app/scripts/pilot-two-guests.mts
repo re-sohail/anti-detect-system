@@ -29,10 +29,17 @@ import { buildGroundTruth } from '../src/main/services/studyExport';
 import type { RunRecord } from '../src/common/ipc';
 
 const { values: args } = parseArgs({
-  options: { image: { type: 'string' }, sha512: { type: 'string' }, origin: { type: 'string' }, out: { type: 'string' } },
+  options: {
+    image: { type: 'string' }, sha512: { type: 'string' }, origin: { type: 'string' }, out: { type: 'string' },
+    // Seconds the browser keeps running after planting the token, before the graceful restart.
+    settle: { type: 'string', default: '60' },
+    // Reuse an existing app data dir and a registered image (e.g. a promoted base) instead of registering --image.
+    data: { type: 'string' },
+    'image-id': { type: 'string' },
+  },
 });
-if (!args.image || !args.out || !args.origin) {
-  console.error('usage: --image FILE --origin URL --out DIR [--sha512 HEX]');
+if (!args.out || (!args['image-id'] && (!args.image || !args.origin))) {
+  console.error('usage: --out DIR (--image FILE --origin URL [--sha512 HEX] | --data DIR --image-id ID) [--settle S]');
   process.exit(2);
 }
 const COLLECTOR = process.env.COLLECTOR_URL ?? 'http://localhost:4100';
@@ -51,7 +58,7 @@ async function waitFor(what: string, ms: number, fn: () => boolean | Promise<boo
   throw new Error(`timed out waiting for ${what}`);
 }
 
-const dataDir = path.join(out, 'data');
+const dataDir = args.data ? path.resolve(args.data) : path.join(out, 'data');
 const db = openDb(dataDir);
 const ctx: Ctx = {
   db, dataDir, hostId: 'host_pilot2', appVersion: 'pilot', electronVersion: 'n/a',
@@ -67,7 +74,7 @@ const server = startProvisioningServer(ctx, PORT, {
     const preset = db.getPreset(g.presetId, g.presetVersion)!;
     return cloudInitUserData({
       guest: g, preset, exit: getExit(ctx, preset.network.routeId), collectorUrl: COLLECTOR,
-      runnerBaseUrl: guestBaseUrl(PORT, g.id, g.provisioning.secret!), agentSource: readAgentSource(agentPath),
+      runnerBaseUrl: guestBaseUrl(PORT, g.id, g.provisioning.secret!), agentSource: readAgentSource(agentPath), packagesPreinstalled: !!db.getImage(g.imageId)?.derivedFrom,
     });
   },
   currentRun: (g) => runs.openRunFor(g.id),
@@ -98,10 +105,13 @@ async function runAndFinish(guestId: string, label: string, treatment: 'T2-vms-o
 const report: Record<string, unknown> = { startedAt: new Date().toISOString(), collector: COLLECTOR };
 const ids: string[] = [];
 try {
-  const img = await registerImage(ctx, args.image, {
-    name: 'Debian 13 generic cloud', version: path.basename(args.image), origin: args.origin, guestOs: 'linux', guestArch: 'aarch64',
-    licenseNotes: 'Debian: DFSG-free software', expectedSha256: args.sha512, provisioning: 'cloud-init',
-  });
+  const img = args['image-id']
+    ? db.getImage(args['image-id']) ?? (() => { throw new Error(`unknown image ${args['image-id']}`); })()
+    : await registerImage(ctx, args.image!, {
+        name: 'Debian 13 generic cloud', version: path.basename(args.image!), origin: args.origin!, guestOs: 'linux', guestArch: 'aarch64',
+        licenseNotes: 'Debian: DFSG-free software', expectedSha256: args.sha512, provisioning: 'cloud-init',
+      });
+  report.image = { id: img.id, sha256: img.sha256, derivedFrom: img.derivedFrom };
   const preset = savePreset(ctx, {
     name: 'Linux desktop study A (two-guest pilot)', description: 'T2/T4 pilot',
     hostConstraint: { arch: ['arm64'], os: ['darwin'], minHostRamMb: 8192, backend: 'qemu' },
@@ -109,8 +119,9 @@ try {
     resources: { vcpus: 2, memoryMb: 3072, diskGb: 16 }, display: { width: 1280, height: 800 },
     regional: { timeZone: 'Europe/London', locale: 'en-GB' }, network: { routeId: 'default-nat' }, expectedBootState: 'desktop-autologin',
   });
-  const A = await guests.create(preset.id, 'guest-A');
-  const B = await guests.create(preset.id, 'guest-B');
+  const tag = Date.now().toString(36).slice(-4);
+  const A = await guests.create(preset.id, `guest-A-${tag}`);
+  const B = await guests.create(preset.id, `guest-B-${tag}`);
   ids.push(A.id, B.id);
   const firstStart = new Date().toISOString();
   await guests.start(A.id, 'headless');
@@ -120,8 +131,17 @@ try {
     [A.id, B.id].every((id) => eventsSince(id, firstStart, 'runner-started') && !!db.getGuest(id)?.provisioning.provisionedAt));
   log('both desktops up');
 
+  report.provisioningMs = Object.fromEntries([A.id, B.id].map((id) => {
+    const ev = db.guestEvents(id);
+    const start = ev.find((e) => e.event === 'start-requested' && e.at >= firstStart)!;
+    const up = ev.find((e) => e.event === 'runner-started' && e.at > firstStart)!;
+    return [id, Date.parse(up.at) - Date.parse(start.at)];
+  }));
+  log(`first boot to desktop (ms): ${JSON.stringify(report.provisioningMs)}`);
   const run1 = await Promise.all([runAndFinish(A.id, 'A-run1', 'T2-vms-one-host', true), runAndFinish(B.id, 'B-run1', 'T2-vms-one-host', false)]);
 
+  log(`letting browsers run ${args.settle}s before restart`);
+  await sleep(Number(args.settle) * 1000);
   log('restarting both guests');
   await Promise.all([guests.stop(A.id, false), guests.stop(B.id, false)]);
   const restartAt = new Date().toISOString();
@@ -147,6 +167,8 @@ try {
   };
   for (const [k, v] of Object.entries(checks)) log(`${v ? 'PASS' : 'FAIL'}  ${k}`);
   report.checks = checks;
+  report.settleSeconds = Number(args.settle);
+  if (Object.values(checks).some((v) => !v)) report.failedChecks = Object.entries(checks).filter(([, v]) => !v).map(([k]) => k);
   report.runs = await Promise.all([...run1, ...run2].map(async (r) => {
     const d = await runs.detail(r.id);
     return { id: r.id, status: r.status, reason: r.statusReason, treatment: r.treatment, guest: r.guestId, compare: d.compare };
@@ -175,5 +197,5 @@ try {
   writeFileSync(path.join(out, 'pilot-report.json'), JSON.stringify(report, null, 2));
   log(`report: ${path.join(out, 'pilot-report.json')}`);
   server.close();
-  process.exit(report.error ? 1 : 0);
+  process.exit(report.error || report.failedChecks ? 1 : 0);
 }
